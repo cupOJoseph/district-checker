@@ -37,7 +37,7 @@ export async function GET() {
             Virginia Redistricting
           </div>
           <div style={{ fontSize: "56px", fontWeight: "bold", textAlign: "center" as const, lineHeight: 1.2, maxWidth: "900px" }}>
-            Am I in the New 7th District?
+            What&apos;s My New Virginia District?
           </div>
           <div
             style={{
@@ -48,7 +48,7 @@ export async function GET() {
               textAlign: "center" as const,
             }}
           >
-            Check how Virginia&apos;s proposed congressional maps affect your representation
+            See how Virginia&apos;s proposed redistricting maps change your district
           </div>
           <div
             style={{

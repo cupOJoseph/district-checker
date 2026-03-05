@@ -3,22 +3,22 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://district-checker.vercel.app"),
-  title: "Am I in Virginia's New 7th District? | Virginia Redistricting Checker",
+  title: "What's My New Virginia District? | Virginia Redistricting Checker",
   description:
-    "Check if your address falls in Virginia's new proposed congressional districts. See how redistricting changes your representation with our interactive map tool.",
+    "Virginia is redrawing its congressional maps. Enter your address to find your current and proposed new district with our free interactive map tool.",
   keywords: [
     "Virginia redistricting",
-    "VA-7",
-    "congressional district",
+    "Virginia congressional districts",
     "district checker",
     "Virginia maps",
-    "gerrymandering",
-    "fair maps",
+    "redistricting 2026",
+    "fair maps Virginia",
+    "find my district",
   ],
   openGraph: {
-    title: "Am I in Virginia's New 7th District?",
+    title: "What's My New Virginia District?",
     description:
-      "Check if your address falls in Virginia's new proposed congressional districts. Interactive map tool for every Virginian.",
+      "Virginia is redrawing its congressional maps. Find your current and proposed new district with our free interactive map.",
     url: "https://district-checker.vercel.app",
     siteName: "Virginia Redistricting Checker",
     images: [
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Am I in Virginia's New 7th District?",
+    title: "What's My New Virginia District?",
     description:
-      "Check if your address falls in Virginia's new proposed congressional districts.",
+      "Virginia is redrawing its congressional maps. Find your current and proposed new district.",
     images: ["/og"],
   },
   robots: { index: true, follow: true },

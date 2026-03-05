@@ -3,11 +3,10 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const proposedColors: Record<string, string> = {
-  "1": "#93c5fd", "2": "#93c5fd", "3": "#93c5fd", "4": "#93c5fd",
-  "5": "#93c5fd", "6": "#93c5fd", "7": "#1e3a5f", "8": "#93c5fd",
-  "9": "#93c5fd", "10": "#93c5fd", "11": "#93c5fd",
-};
+const districtColors = [
+  "#1e3a5f", "#2563eb", "#0891b2", "#0d9488", "#059669",
+  "#65a30d", "#ca8a04", "#ea580c", "#dc2626", "#e11d48", "#9333ea",
+];
 
 interface Props {
   highlightDistrict?: string | null;
@@ -39,10 +38,11 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
         proposedLayer.current = L.geoJSON(data, {
           style: (feature) => {
             const id = feature?.properties?.NAME ?? "";
+            const num = parseInt(id) || 0;
             const hl = highlightDistrict && id === highlightDistrict;
             return {
-              fillColor: proposedColors[id] || "#999",
-              fillOpacity: hl ? 0.6 : 0.3,
+              fillColor: districtColors[(num - 1) % districtColors.length] || "#999",
+              fillOpacity: hl ? 0.6 : 0.25,
               color: hl ? "#C5A55A" : "#1B3A5C",
               weight: hl ? 3 : 1.5,
             };
@@ -98,10 +98,11 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
     if (!proposedLayer.current) return;
     proposedLayer.current.setStyle((feature) => {
       const id = feature?.properties?.NAME ?? "";
+      const num = parseInt(id) || 0;
       const hl = highlightDistrict && id === highlightDistrict;
       return {
-        fillColor: proposedColors[id] || "#999",
-        fillOpacity: hl ? 0.6 : 0.3,
+        fillColor: districtColors[(num - 1) % districtColors.length] || "#999",
+        fillOpacity: hl ? 0.6 : 0.25,
         color: hl ? "#C5A55A" : "#1B3A5C",
         weight: hl ? 3 : 1.5,
       };

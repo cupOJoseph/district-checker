@@ -26,10 +26,10 @@ export default function Home() {
         <section className="bg-gradient-to-b from-[#1B3A5C] to-[#2a5a8c] text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Am I in Virginia&apos;s New 7th District?
+              What&apos;s My New Virginia District?
             </h1>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Virginia is redrawing its congressional maps. Enter your address to see how the proposed districts affect your representation.
+              Virginia is redrawing its congressional maps. Enter your address to see your current district and your proposed new one.
             </p>
           </div>
         </section>
@@ -44,13 +44,13 @@ export default function Home() {
         {/* Map */}
         <section className="max-w-6xl mx-auto px-4 py-10">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-[#1B3A5C]">Proposed District Map</h2>
+            <h2 className="text-2xl font-bold text-[#1B3A5C]">Virginia Congressional Districts</h2>
             <div className="flex items-center gap-4 text-sm text-gray-600">
               <span className="flex items-center gap-1">
-                <span className="w-4 h-3 bg-[#1e3a5f] rounded-sm inline-block" /> Proposed District 7
+                <span className="w-4 h-1 bg-[#1B3A5C] inline-block" /> Proposed
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-4 h-3 bg-[#93c5fd] rounded-sm inline-block" /> Other Districts
+                <span className="w-4 h-0.5 bg-[#ef4444] inline-block border-t border-dashed border-red-500" /> Current
               </span>
             </div>
           </div>
