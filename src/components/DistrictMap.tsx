@@ -1,0 +1,128 @@
+"use client";
+import { useEffect, useRef } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+const proposedColors: Record<string, string> = {
+  "1": "#93c5fd", "2": "#93c5fd", "3": "#93c5fd", "4": "#93c5fd",
+  "5": "#93c5fd", "6": "#93c5fd", "7": "#1e3a5f", "8": "#93c5fd",
+  "9": "#93c5fd", "10": "#93c5fd", "11": "#93c5fd",
+};
+
+interface Props {
+  highlightDistrict?: string | null;
+  markerPosition?: [number, number] | null;
+  showCurrent?: boolean;
+}
+
+export default function DistrictMap({ highlightDistrict, markerPosition, showCurrent = false }: Props) {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstance = useRef<L.Map | null>(null);
+  const proposedLayer = useRef<L.GeoJSON | null>(null);
+  const currentLayer = useRef<L.GeoJSON | null>(null);
+  const labelsLayer = useRef<L.LayerGroup | null>(null);
+  const markerRef = useRef<L.Marker | null>(null);
+
+  useEffect(() => {
+    if (!mapRef.current || mapInstance.current) return;
+    const map = L.map(mapRef.current).setView([37.5, -79.0], 7);
+    mapInstance.current = map;
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 18,
+    }).addTo(map);
+
+    fetch("/va-districts-proposed.geojson")
+      .then((r) => r.json())
+      .then((data) => {
+        proposedLayer.current = L.geoJSON(data, {
+          style: (feature) => {
+            const id = feature?.properties?.NAME ?? "";
+            const hl = highlightDistrict && id === highlightDistrict;
+            return {
+              fillColor: proposedColors[id] || "#999",
+              fillOpacity: hl ? 0.6 : 0.3,
+              color: hl ? "#C5A55A" : "#1B3A5C",
+              weight: hl ? 3 : 1.5,
+            };
+          },
+          onEachFeature: (feature, layer) => {
+            const id = feature.properties?.NAME;
+            if (id) layer.bindTooltip(`District ${parseInt(id)}`, { sticky: true, className: "district-tooltip" });
+          },
+        }).addTo(map);
+
+        labelsLayer.current = L.layerGroup().addTo(map);
+        for (const feature of data.features) {
+          const id = feature.properties?.NAME;
+          const num = parseInt(id);
+          if (!num) continue;
+          const layer = L.geoJSON(feature);
+          const center = layer.getBounds().getCenter();
+          const label = L.divIcon({
+            className: "district-label",
+            html: `<div style="font-weight:bold;font-size:14px;color:#1B3A5C;text-shadow:1px 1px 2px white,-1px -1px 2px white,1px -1px 2px white,-1px 1px 2px white;">${num}</div>`,
+            iconSize: [30, 20],
+            iconAnchor: [15, 10],
+          });
+          L.marker(center, { icon: label, interactive: false }).addTo(labelsLayer.current);
+        }
+      });
+
+    if (showCurrent) {
+      fetch("/va-districts-current.geojson")
+        .then((r) => r.json())
+        .then((data) => {
+          currentLayer.current = L.geoJSON(data, {
+            style: () => ({
+              fillColor: "transparent",
+              fillOpacity: 0,
+              color: "#ef4444",
+              weight: 2,
+              dashArray: "6 4",
+            }),
+            onEachFeature: (feature, layer) => {
+              const id = feature.properties?.NAME || feature.properties?.DISTRICT;
+              if (id) layer.bindTooltip(`Current District ${id}`, { sticky: true });
+            },
+          }).addTo(map);
+        });
+    }
+
+    return () => { map.remove(); mapInstance.current = null; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!proposedLayer.current) return;
+    proposedLayer.current.setStyle((feature) => {
+      const id = feature?.properties?.NAME ?? "";
+      const hl = highlightDistrict && id === highlightDistrict;
+      return {
+        fillColor: proposedColors[id] || "#999",
+        fillOpacity: hl ? 0.6 : 0.3,
+        color: hl ? "#C5A55A" : "#1B3A5C",
+        weight: hl ? 3 : 1.5,
+      };
+    });
+  }, [highlightDistrict]);
+
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    if (markerRef.current) { markerRef.current.remove(); markerRef.current = null; }
+    if (markerPosition) {
+      const icon = L.icon({
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+        shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+      });
+      markerRef.current = L.marker(markerPosition, { icon }).addTo(mapInstance.current);
+      mapInstance.current.setView(markerPosition, 10);
+    }
+  }, [markerPosition]);
+
+  return <div ref={mapRef} className="w-full h-[500px] rounded-lg border border-gray-200" />;
+}
