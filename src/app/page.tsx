@@ -45,14 +45,7 @@ export default function Home() {
         <section className="max-w-6xl mx-auto px-4 py-10">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold text-[#1B3A5C]">Virginia Congressional Districts</h2>
-            <div className="flex items-center gap-4 text-sm text-gray-600">
-              <span className="flex items-center gap-1">
-                <span className="w-4 h-1 bg-[#1B3A5C] inline-block" /> Proposed
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="w-4 h-0.5 bg-[#ef4444] inline-block border-t border-dashed border-red-500" /> Current
-              </span>
-            </div>
+            <p className="text-sm text-gray-500">Hover over a district for details</p>
           </div>
           <Suspense fallback={<div className="w-full h-[500px] bg-gray-100 rounded-lg animate-pulse" />}>
             <DistrictMap

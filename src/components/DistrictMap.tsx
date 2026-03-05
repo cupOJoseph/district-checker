@@ -5,8 +5,8 @@ import "leaflet/dist/leaflet.css";
 import pointOnFeature from "@turf/point-on-feature";
 
 const districtColors = [
-  "#1e3a5f", "#2563eb", "#0891b2", "#0d9488", "#059669",
-  "#65a30d", "#ca8a04", "#ea580c", "#dc2626", "#e11d48", "#9333ea",
+  "#1e3a5f", "#2a4a6f", "#1a4a7a", "#2d5a8a", "#1e4e6e",
+  "#2a5575", "#1a3f5f", "#2d4a6a", "#1e5a7a", "#2a4060", "#1a4565",
 ];
 
 interface Props {
@@ -28,8 +28,8 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
     const map = L.map(mapRef.current).setView([37.5, -79.0], 7);
     mapInstance.current = map;
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
       maxZoom: 18,
     }).addTo(map);
 
@@ -57,25 +57,7 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
         labelsLayer.current = L.layerGroup().addTo(map);
       });
 
-    if (showCurrent) {
-      fetch("/va-districts-current.geojson")
-        .then((r) => r.json())
-        .then((data) => {
-          currentLayer.current = L.geoJSON(data, {
-            style: () => ({
-              fillColor: "transparent",
-              fillOpacity: 0,
-              color: "#ef4444",
-              weight: 2,
-              dashArray: "6 4",
-            }),
-            onEachFeature: (feature, layer) => {
-              const id = feature.properties?.NAME || feature.properties?.DISTRICT;
-              if (id) layer.bindTooltip(`Current District ${id}`, { sticky: true });
-            },
-          }).addTo(map);
-        });
-    }
+    // Current districts loaded but not shown by default — too busy
 
     return () => { map.remove(); mapInstance.current = null; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
