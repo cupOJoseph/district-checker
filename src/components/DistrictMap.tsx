@@ -55,21 +55,6 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
         }).addTo(map);
 
         labelsLayer.current = L.layerGroup().addTo(map);
-        for (const feature of data.features) {
-          const id = feature.properties?.NAME;
-          const num = parseInt(id);
-          if (!num) continue;
-          const pt = pointOnFeature(feature);
-          const [lng, lat] = pt.geometry.coordinates;
-          const center = L.latLng(lat, lng);
-          const label = L.divIcon({
-            className: "district-label",
-            html: `<div style="font-weight:bold;font-size:14px;color:#1B3A5C;text-shadow:1px 1px 2px white,-1px -1px 2px white,1px -1px 2px white,-1px 1px 2px white;">${num}</div>`,
-            iconSize: [30, 20],
-            iconAnchor: [15, 10],
-          });
-          L.marker(center, { icon: label, interactive: false }).addTo(labelsLayer.current);
-        }
       });
 
     if (showCurrent) {
