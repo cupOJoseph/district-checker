@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import pointOnFeature from "@turf/point-on-feature";
 
 const districtColors = [
   "#1e3a5f", "#2563eb", "#0891b2", "#0d9488", "#059669",
@@ -58,8 +59,9 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
           const id = feature.properties?.NAME;
           const num = parseInt(id);
           if (!num) continue;
-          const layer = L.geoJSON(feature);
-          const center = layer.getBounds().getCenter();
+          const pt = pointOnFeature(feature);
+          const [lng, lat] = pt.geometry.coordinates;
+          const center = L.latLng(lat, lng);
           const label = L.divIcon({
             className: "district-label",
             html: `<div style="font-weight:bold;font-size:14px;color:#1B3A5C;text-shadow:1px 1px 2px white,-1px -1px 2px white,1px -1px 2px white,-1px 1px 2px white;">${num}</div>`,
