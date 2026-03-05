@@ -27,7 +27,10 @@ export default function AddressChecker({ onResult }: Props) {
       const pt = point([lon, lat]);
       for (const feature of data.features) {
         if (booleanPointInPolygon(pt, feature as Feature<Polygon | MultiPolygon>)) {
-          return feature.properties?.NAME || feature.properties?.DISTRICT || null;
+          const name = feature.properties?.NAME || feature.properties?.DISTRICT || "";
+          // Extract just the number — handles "Congressional District 4" and "4"
+          const match = name.match(/(\d+)/);
+          return match ? match[1] : name || null;
         }
       }
       return null;
