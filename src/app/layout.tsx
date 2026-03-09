@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "Virginia Redistricting Checker",
     images: [
       {
-        url: "/og",
+        url: "/og?v=2",
         width: 1200,
         height: 630,
         alt: "Virginia Redistricting Checker - Check Your New District",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "What's My New Virginia District?",
     description:
       "Virginia is redrawing its congressional maps. Find your current and proposed new district.",
-    images: ["/og"],
+    images: ["/og?v=2"],
   },
   robots: { index: true, follow: true },
 };
