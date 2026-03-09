@@ -131,7 +131,7 @@ export default function AddressChecker({ onResult }: Props) {
           {changed && (
             <div className="bg-amber-50 border-2 border-amber-400 rounded-lg p-6 space-y-3">
               <h3 className="text-xl font-bold text-amber-800 flex items-center gap-2">
-                <span className="text-2xl">⚠️</span> Under the Proposed Map — Your district would change!
+                <span className="text-2xl">⚠️</span> Under the proposed map your district would change!
               </h3>
               <p className="text-amber-900 text-lg">
                 You would move from <strong>District {result.current}</strong> to <strong>District {result.proposed}</strong>.
