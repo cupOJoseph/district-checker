@@ -109,26 +109,50 @@ export default function AddressChecker({ onResult }: Props) {
       )}
 
       {result && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 space-y-2">
-          {result.proposed && (
-            <p className="text-xl">
-              📍 Your <strong>new proposed district</strong>: <span className="text-[#1B3A5C] font-bold text-2xl">District {parseInt(result.proposed)}</span>
-            </p>
-          )}
-          {result.current && (
-            <p className="text-gray-600">
-              Your current district: District {parseInt(result.current)}
-            </p>
-          )}
+        <div className="space-y-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 space-y-2">
+            {result.proposed && (
+              <p className="text-xl">
+                📍 Your <strong>new proposed district</strong>: <span className="text-[#1B3A5C] font-bold text-2xl">District {parseInt(result.proposed)}</span>
+              </p>
+            )}
+            {result.current && (
+              <p className="text-gray-600">
+                Your current district: District {parseInt(result.current)}
+              </p>
+            )}
+            {!changed && result.proposed && (
+              <p className="text-green-700 font-medium mt-2">
+                ✅ Your district stays the same under the proposed maps.
+              </p>
+            )}
+          </div>
+
           {changed && (
-            <p className="text-amber-700 font-medium mt-2">
-              ⚡ Your district would change under the proposed maps!
-            </p>
-          )}
-          {!changed && result.proposed && (
-            <p className="text-green-700 font-medium mt-2">
-              ✅ Your district stays the same under the proposed maps.
-            </p>
+            <div className="bg-amber-50 border-2 border-amber-400 rounded-lg p-6 space-y-3">
+              <h3 className="text-xl font-bold text-amber-800 flex items-center gap-2">
+                <span className="text-2xl">⚠️</span> Under the proposed map your district would change!
+              </h3>
+              <p className="text-amber-900 text-lg">
+                You would move from <strong>District {result.current}</strong> to <strong>District {result.proposed}</strong>.
+              </p>
+              {result.proposed === "7" && (
+                <p className="text-gray-700">
+                  Proposed District 7 partisan lean: <strong>D+8.0</strong> (D 52.8% / R 44.8%)
+                </p>
+              )}
+              <p className="text-gray-700">
+                Overall, the proposed map would shift Virginia from the current 6D-5R split to a projected <strong>10D-1R</strong> configuration.
+              </p>
+              <div className="mt-3 p-4 bg-white/70 rounded-lg border border-amber-200 text-sm text-gray-700 space-y-2">
+                <p>
+                  <strong>🗳️ Early Voting</strong> for the referendum has already started and the final day for voting these new temporary maps is scheduled for <strong>April 21, 2026</strong>.
+                </p>
+                <p>
+                  The law for the proposed maps will only be valid until the next census in 2030, which will automatically trigger redistricting again according to a bi-partisan commission backed by the Virginia Supreme Court.
+                </p>
+              </div>
+            </div>
           )}
         </div>
       )}
