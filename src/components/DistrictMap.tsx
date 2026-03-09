@@ -5,8 +5,8 @@ import "leaflet/dist/leaflet.css";
 import pointOnFeature from "@turf/point-on-feature";
 
 const districtColors = [
-  "#1e3a5f", "#2a4a6f", "#1a4a7a", "#2d5a8a", "#1e4e6e",
-  "#2a5575", "#1a3f5f", "#2d4a6a", "#1e5a7a", "#2a4060", "#1a4565",
+  "#5b9bd5", "#7ab8e0", "#4a90c4", "#6aaed6", "#8ec5e8",
+  "#5da5d8", "#79b7db", "#4d96c8", "#6db3de", "#8ac2e4", "#5ea8da",
 ];
 
 interface Props {
