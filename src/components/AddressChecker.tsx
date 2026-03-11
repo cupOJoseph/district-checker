@@ -142,14 +142,14 @@ export default function AddressChecker({ onResult }: Props) {
                 </p>
               )}
               <p className="text-gray-700">
-                Overall, the proposed map would shift Virginia from the current 6D-5R split to a projected <strong>10D-1R</strong> configuration.
+                Overall, the proposed map would shift Virginia from the current 6D-5R split to a projected 10D-1R configuration.
               </p>
               <div className="mt-3 p-4 bg-white/70 rounded-lg border border-amber-200 text-sm text-gray-700 space-y-2">
                 <p>
-                  <strong>🗳️ Early Voting</strong> for the referendum has already started and the final day for voting these new temporary maps is scheduled for <strong>April 21, 2026</strong>.
+                  <strong>🗳️ Early Voting for the referendum has already started</strong> and the final day for voting these new temporary maps is scheduled for <strong>April 21, 2026.</strong>. The Virginia Supreme Court has allowed the referendum to proceed.
                 </p>
                 <p>
-                  The law for the proposed maps will only be valid until the next census in 2030, which will automatically trigger redistricting again according to a bi-partisan commission backed by the Virginia Supreme Court.
+                  The proposed maps would only be valid until the next census in 2030, which will automatically trigger redistricting again according to a bi-partisan commission backed by the Virginia Supreme Court.
                 </p>
               </div>
             </div>
