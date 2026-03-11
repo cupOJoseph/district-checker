@@ -1,8 +1,10 @@
 # Virginia Redistricting District Checker
 
+This project is provided for free as a public service.
+
 Find out which Virginia congressional district you're in — both your current district and your proposed district under the 2026 redistricting maps.
 
-**Live:** [district-checker.vercel.app](https://district-checker.vercel.app) (once deployed)
+**Live:** [district-checker.vercel.app](https://www.vadistricts.org/) 
 
 ## Features
 
