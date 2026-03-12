@@ -77,20 +77,6 @@ export default function Home() {
               </p>
               <EmailSignup />
             </div>
-
-            <div className="text-center">
-              <a
-                href="https://secure.actblue.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-[#1B3A5C] text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-[#0f2640] transition-colors"
-              >
-                Support Fair Maps in Virginia
-              </a>
-              <p className="text-gray-500 text-sm mt-2">
-                Help ensure every Virginian has equal representation.
-              </p>
-            </div>
           </div>
         </section>
       </main>
