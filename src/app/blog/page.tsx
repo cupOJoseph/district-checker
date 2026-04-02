@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Why Redistricting Matters for Virginia | Virginia Redistricting Checker",
   description:
     "Gerrymandering has shaped Virginia's politics for decades. Here's why the new proposed maps are a step toward fairer representation.",
+  alternates: {
+    canonical: "https://vadistricts.org/blog",
+  },
 };
 
 export default function BlogPage() {

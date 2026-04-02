@@ -56,6 +56,40 @@ export default function Home() {
           </Suspense>
         </section>
 
+        {/* FAQ */}
+        <section className="bg-white py-16 px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-[#1B3A5C] mb-8 text-center">Frequently Asked Questions</h2>
+            <div className="space-y-6">
+              {[
+                {
+                  q: "What is Virginia redistricting?",
+                  a: "Virginia is proposing new congressional district maps through a mid-decade redistricting process. A referendum on April 21, 2026 will let voters decide whether to adopt the new maps before the November midterm elections.",
+                },
+                {
+                  q: "How do I check my new Virginia district?",
+                  a: "Enter your address in the checker tool above and it will show you both your current congressional district and your proposed new district under the new maps.",
+                },
+                {
+                  q: "When is the Virginia redistricting referendum?",
+                  a: "The redistricting referendum is scheduled for April 21, 2026. Early voting has been open since March 6, 2026.",
+                },
+                {
+                  q: "Will my congressional district change?",
+                  a: "It depends on where you live. The proposed maps significantly redraw several districts, especially in Northern Virginia and Central Virginia. Use our free checker tool to find out.",
+                },
+              ].map(({ q, a }) => (
+                <details key={q} className="border border-gray-200 rounded-lg p-4 group">
+                  <summary className="font-semibold text-[#1B3A5C] cursor-pointer group-open:mb-2">
+                    {q}
+                  </summary>
+                  <p className="text-gray-600">{a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Info + Email */}
         <section className="bg-gray-50 py-16 px-4">
           <div className="max-w-4xl mx-auto space-y-12">
