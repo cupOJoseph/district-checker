@@ -104,6 +104,25 @@ export default function Home() {
               </a>
             </div>
 
+            <div className="grid md:grid-cols-2 gap-4">
+              <a href="/districts" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
+                <div className="text-lg font-bold text-[#1B3A5C] mb-1">Browse all 11 districts →</div>
+                <div className="text-sm text-gray-600">See every Virginia congressional district, current rep, and proposed changes.</div>
+              </a>
+              <a href="/proposed-map" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
+                <div className="text-lg font-bold text-[#1B3A5C] mb-1">The proposed map, explained →</div>
+                <div className="text-sm text-gray-600">A plain-English breakdown of what actually changes under the 2026 map.</div>
+              </a>
+              <a href="/referendum" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
+                <div className="text-lg font-bold text-[#1B3A5C] mb-1">April 21 referendum →</div>
+                <div className="text-sm text-gray-600">Election day, early voting, and what&apos;s on the ballot.</div>
+              </a>
+              <a href="/faq" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
+                <div className="text-lg font-bold text-[#1B3A5C] mb-1">Redistricting FAQ →</div>
+                <div className="text-sm text-gray-600">Common questions about Virginia redistricting, answered.</div>
+              </a>
+            </div>
+
             <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
               <h3 className="text-xl font-bold text-[#1B3A5C] mb-2">Stay Informed</h3>
               <p className="text-gray-600 mb-4">
