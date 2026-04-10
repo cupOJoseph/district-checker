@@ -51,20 +51,24 @@ export default function ReferendumPage() {
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-8 mb-4">What is on the ballot?</h2>
           <p>
             Virginia voters will decide whether to adopt a new set of congressional district maps
-            in place of the 119th Congress boundaries. This is a <strong>mid-decade
-            redistricting</strong> — unusual, because district lines are normally only redrawn
-            after each decennial census. The proposed maps were passed by the General Assembly and
-            signed by Governor Spanberger in February 2026, and now go to voters for final
-            approval.
+            in place of the 119th Congress boundaries. The proposed maps were passed by the
+            General Assembly and signed by Governor Spanberger in February 2026, and now go to
+            voters for final approval. A <strong>yes</strong> vote adopts the new, fairer maps
+            for the 2026 elections.
           </p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">Why is this happening?</h2>
           <p>
-            Supporters argue that the current congressional maps fragment communities of interest —
-            especially in Northern and Central Virginia — and that the proposed maps do a better
-            job of keeping cities, counties, and regional corridors together. The new maps also
-            make several currently safe districts more competitive, which proponents say gives
-            voters more meaningful choices.
+            The current congressional maps fragment real communities — especially in Northern and
+            Central Virginia — splitting cities, counties, and regional corridors across multiple
+            districts to protect incumbents. The proposed maps fix that. They keep communities of
+            interest together and make several long-safe districts genuinely competitive, giving
+            Virginians meaningful choices instead of predetermined outcomes.
+          </p>
+          <p>
+            Checks and balances only work when maps are drawn for people, not politicians. As
+            other states push more extreme gerrymanders, Virginia has a chance to stand up for
+            fair representation — and this referendum is how we do it.
           </p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">Key dates</h2>

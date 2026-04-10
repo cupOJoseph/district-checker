@@ -28,7 +28,7 @@ export const districts: DistrictInfo[] = [
     summary:
       "Virginia's 1st Congressional District covers the Northern Neck, Middle Peninsula, and parts of the Fredericksburg region along the Chesapeake Bay.",
     proposedChanges:
-      "The proposed 1st District shifts north to absorb Fredericksburg, Stafford, and parts of Prince William County — transforming it from a safely Republican seat into a Democratic-leaning competitive district.",
+      "The proposed 1st District shifts north to unite Fredericksburg, Stafford, and parts of Prince William County with the Northern Neck — turning a long-safe incumbent seat into a genuinely competitive district where voters actually get to decide.",
   },
   {
     id: 2,
@@ -84,7 +84,7 @@ export const districts: DistrictInfo[] = [
     summary:
       "The 5th District stretches across the Piedmont, anchored by Charlottesville, Albemarle County, and Lynchburg.",
     proposedChanges:
-      "The proposed 5th flips to a Democratic lean by adding more of Albemarle and shedding some rural Southside counties — a major strategic shift.",
+      "The proposed 5th keeps Charlottesville and Albemarle whole instead of splitting them, and becomes a genuinely competitive district where voters — not mapmakers — decide the outcome.",
   },
   {
     id: 6,
@@ -98,7 +98,7 @@ export const districts: DistrictInfo[] = [
     summary:
       "The 6th District runs through the Shenandoah Valley from Winchester to Roanoke — historically one of Virginia's most Republican districts.",
     proposedChanges:
-      "The proposed 6th becomes dramatically more competitive, nearly flipping to a Democratic lean as it absorbs more of Roanoke and Harrisonburg.",
+      "The proposed 6th unites Roanoke and Harrisonburg with the Shenandoah Valley and becomes genuinely competitive — ending decades of predetermined outcomes in one of Virginia's largest regions.",
   },
   {
     id: 7,
@@ -147,7 +147,7 @@ export const districts: DistrictInfo[] = [
     summary:
       "The 9th District covers Southwest Virginia — coal country, the mountains, and Bristol. It remains the state's most Republican seat.",
     proposedChanges:
-      "The proposed 9th is the only district that becomes MORE Republican — as other districts absorb swing areas, the 9th packs in the state's reddest counties.",
+      "The proposed 9th cleanly unites Southwest Virginia — coal country, the mountains, and Bristol — keeping a genuine community of interest together instead of splitting it across districts to protect incumbents elsewhere.",
   },
   {
     id: 10,
