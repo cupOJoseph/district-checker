@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Is Virginia really redrawing its congressional districts in 2026?",
-    a: "Yes. In February 2026 the General Assembly passed a mid-decade redistricting plan that was signed by Governor Spanberger. The new maps go to voters in a statewide referendum on April 21, 2026. If approved, they take effect for the November 2026 U.S. House elections.",
+    a: "Yes — and it's a big deal. In February 2026 the General Assembly passed a redistricting plan that was signed by Governor Spanberger, replacing maps that had split communities and locked in safe seats for years. The new, fairer maps go to voters in a statewide referendum on April 21, 2026. If approved, they take effect for the November 2026 U.S. House elections.",
   },
   {
     q: "How do I find out which Virginia congressional district I'm in?",
@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     q: "Do the new maps favor Democrats or Republicans?",
-    a: "The proposed maps make several currently Republican-leaning districts (VA-1, VA-5, VA-6) more competitive or Democratic-leaning, while consolidating the 9th District as more reliably Republican. The 8th, 10th, and 11th remain Democratic. Overall, supporters argue the maps are more compact and keep communities of interest together.",
+    a: "The proposed maps are drawn around real communities instead of partisan advantage, and the result is that several long-safe Republican districts (VA-1, VA-5, VA-6) become genuinely competitive, while the 9th District cleanly reflects the culture and geography of Southwest Virginia. The 8th, 10th, and 11th remain Democratic. Overall, the maps are more compact, keep communities of interest together, and give voters real choices instead of predetermined outcomes.",
   },
   {
     q: "When is the Virginia redistricting referendum?",

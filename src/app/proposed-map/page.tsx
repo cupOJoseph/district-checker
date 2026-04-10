@@ -66,11 +66,17 @@ export default function ProposedMapPage() {
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">The big picture</h2>
           <p>
-            Virginia keeps 11 congressional districts, but the lines inside the state shift
-            meaningfully. The old map had roughly 4 reliably Democratic seats, 4 reliably
-            Republican seats, and 3 competitive seats. The proposed map tilts that balance by
-            softening several Republican strongholds and packing the most Republican counties into
-            the 9th District.
+            Virginia keeps 11 congressional districts, but the lines inside the state finally
+            start to make sense. The old map carved up communities to lock in safe seats for
+            incumbents of both parties. The proposed map keeps cities, counties, and regional
+            corridors together, and in doing so makes several districts genuinely competitive
+            again — which means voters, not mapmakers, get to decide who represents them.
+          </p>
+          <p>
+            This matters beyond Virginia. As other states have gerrymandered more and more
+            aggressively, checks and balances only work if fair-map states actually stand up.
+            Virginia&apos;s proposed map is one of those levers — a chance to show what
+            representation looks like when districts are drawn for people instead of politicians.
           </p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">
@@ -101,13 +107,14 @@ export default function ProposedMapPage() {
           </p>
 
           <h3 className="text-xl font-bold text-[#1B3A5C] mt-6 mb-2">
-            3. VA-9 becomes even more Republican
+            3. VA-9 is drawn around a real community of interest
           </h3>
           <p>
-            As swing counties get moved out of neighboring districts, the{" "}
-            <Link href="/districts/9">9th District</Link> ends up as the one safe-Republican seat
-            left in the map. Critics call this &ldquo;packing&rdquo;; supporters say it simply
-            reflects the reality of Southwest Virginia&apos;s politics.
+            The <Link href="/districts/9">9th District</Link> now cleanly covers Southwest
+            Virginia — coal country, the mountains, and Bristol — keeping those communities
+            together instead of splitting them across multiple districts to prop up incumbents
+            elsewhere. It reflects the actual geography and culture of the region, not a partisan
+            carve-up.
           </p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">
@@ -138,6 +145,16 @@ export default function ProposedMapPage() {
             The fastest way to see exactly what changes for you is to{" "}
             <Link href="/">enter your address on the checker</Link>. It will show you your current
             district, your proposed district, and whether they&apos;re different.
+          </p>
+
+          <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">Why it matters</h2>
+          <p>
+            Democracy depends on checks and balances, and fair districts are one of the biggest
+            levers we have. When maps are drawn to reflect real communities instead of to protect
+            incumbents, elections get more competitive, turnout goes up, and elected officials
+            actually have to listen to the people they represent. Virginia&apos;s proposed map is
+            a chance to pull that lever — and show the rest of the country what fair representation
+            looks like.
           </p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">Sources</h2>
