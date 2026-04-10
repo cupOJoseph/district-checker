@@ -35,12 +35,18 @@ export default function BlogPage() {
             Virginia has experienced both. For years, the state&apos;s congressional map featured districts that snaked through disconnected communities, splitting counties and cities to serve partisan interests rather than the people who live there. The result? Elections where outcomes were predetermined, representatives who answered to party bosses instead of constituents, and communities that lost their collective voice.
           </p>
 
-          <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">What Fair Maps Look Like</h2>
+          <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">The Gerrymandering Arms Race</h2>
           <p>
-            Fair redistricting follows a few common-sense principles: districts should be compact and contiguous, respect existing city and county boundaries, keep communities of interest together, and — crucially — not be drawn to advantage any political party.
+            Right now, Republicans are waging an unprecedented gerrymandering campaign across the country — and they&apos;re winning. In Texas, Republican legislators drew maps so extreme that millions of voters of color were packed into a handful of districts while safe Republican seats multiplied. In North Carolina, the GOP legislature overrode courts and a Democratic governor to ram through maps that turned a competitive state into a near-permanent Republican supermajority. Ohio voters passed anti-gerrymandering reforms <em>twice</em>, and Republican mapmakers ignored them both times. In Florida, Governor DeSantis personally redrew the congressional map to eliminate a Black-majority district that had existed for three decades.
           </p>
           <p>
-            Virginia&apos;s new proposed maps represent a meaningful step in this direction. The proposed District 7, for example, brings together communities in Northern and Central Virginia that share economic ties, transportation corridors, and regional concerns. Instead of fragmenting suburban communities between multiple districts, the new maps keep them whole.
+            This isn&apos;t happening by accident. Donald Trump has openly told Republican state legislators to gerrymander aggressively, and they&apos;re listening. The result is a system with no checks and balances — where one party can lock in power regardless of how people actually vote. The Supreme Court ruled in <em>Rucho v. Common Cause</em> that federal courts can&apos;t even hear partisan gerrymandering cases, leaving voters with essentially no recourse.
+          </p>
+          <p>
+            Meanwhile, Democrats in many states have refused to respond in kind, unilaterally disarming while their opponents redraw the country out from under them. If this continues, Democrats risk being gerrymandered into permanent minority status — not because they lack voters, but because the maps won&apos;t let those voters matter.
+          </p>
+          <p>
+            Virginia has a chance to be different. Instead of letting politicians in other states decide what Virginia&apos;s representation looks like, Virginians can step up and demand maps that actually reflect their communities. Fair maps aren&apos;t just about one party or the other — they&apos;re about making sure that Virginia voices are counted and heard, instead of being diluted and taken advantage of by a national partisan machine.
           </p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-10 mb-4">Why It Matters to You</h2>
