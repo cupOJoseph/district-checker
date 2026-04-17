@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 import { point } from "@turf/helpers";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import type { Feature, Polygon, MultiPolygon } from "geojson";
+import CandidateCard from "./CandidateCard";
 
 interface Result {
   proposed: string | null;
@@ -127,6 +128,10 @@ export default function AddressChecker({ onResult }: Props) {
               </p>
             )}
           </div>
+
+          {result.proposed === "7" && (
+            <CandidateCard className="mt-4" />
+          )}
 
           {changed && (
             <div className="bg-amber-50 border-2 border-amber-400 rounded-lg p-6 space-y-3">

@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EmailSignup from "@/components/EmailSignup";
 import { districts, getDistrict } from "@/data/districts";
+import CandidateCard from "@/components/CandidateCard";
 
 export function generateStaticParams() {
   return districts.map((d) => ({ id: String(d.id) }));
@@ -125,6 +126,10 @@ export default async function DistrictPage({
             What Changes in the Proposed 2026 Map
           </h2>
           <p className="text-gray-700 leading-relaxed mb-6">{d.proposedChanges}</p>
+
+          {d.id === 7 && (
+            <CandidateCard className="mt-8" />
+          )}
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-8 mb-3">Major Areas</h2>
           <ul className="list-disc list-inside text-gray-700 mb-8 space-y-1">
