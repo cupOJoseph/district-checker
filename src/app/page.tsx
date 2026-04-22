@@ -54,6 +54,9 @@ export default function Home() {
               showCurrent={true}
             />
           </Suspense>
+          <p className="text-sm text-gray-400 italic mt-3">
+            *Some counties and cities are split between multiple districts. Be sure to use your specific residential address.
+          </p>
         </section>
 
         {/* FAQ */}
