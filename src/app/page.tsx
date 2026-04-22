@@ -26,10 +26,10 @@ export default function Home() {
         <section className="bg-gradient-to-b from-[#1B3A5C] to-[#2a5a8c] text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              What&apos;s My New Virginia District?
+              What&apos;s My Virginia District?
             </h1>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Virginia is redrawing its congressional maps. Enter your address to see your current district and your proposed new one.
+              Virginia&apos;s new congressional maps are official. Enter your address to find your district.
             </p>
           </div>
         </section>
@@ -63,20 +63,20 @@ export default function Home() {
             <div className="space-y-6">
               {[
                 {
-                  q: "What is Virginia redistricting?",
-                  a: "Virginia is proposing new congressional district maps through a mid-decade redistricting process. A referendum on April 21, 2026 will let voters decide whether to adopt the new maps before the November midterm elections.",
+                  q: "What happened with Virginia redistricting?",
+                  a: "Virginia voters approved new congressional district maps in a referendum on April 21, 2026. The new maps are now in effect for the 2026 midterm elections.",
                 },
                 {
-                  q: "How do I check my new Virginia district?",
-                  a: "Enter your address in the checker tool above and it will show you both your current congressional district and your proposed new district under the new maps.",
+                  q: "How do I check my Virginia district?",
+                  a: "Enter your address in the checker tool above to see which congressional district you're in under the new maps.",
                 },
                 {
-                  q: "When is the Virginia redistricting referendum?",
-                  a: "The redistricting referendum is scheduled for April 21, 2026. Early voting has been open since March 6, 2026.",
+                  q: "Did the redistricting referendum pass?",
+                  a: "Yes. Virginia voters approved the redistricting referendum on April 21, 2026. The new maps are now official.",
                 },
                 {
-                  q: "Will my congressional district change?",
-                  a: "It depends on where you live. The proposed maps significantly redraw several districts, especially in Northern Virginia and Central Virginia. Use our free checker tool to find out.",
+                  q: "Did my congressional district change?",
+                  a: "It depends on where you live. The new maps significantly redrew several districts, especially in Northern Virginia and Central Virginia. Use our free checker tool to find out.",
                 },
               ].map(({ q, a }) => (
                 <details key={q} className="border border-gray-200 rounded-lg p-4 group">
@@ -96,7 +96,7 @@ export default function Home() {
             <div className="text-center">
               <h2 className="text-3xl font-bold text-[#1B3A5C] mb-4">Why Redistricting Matters</h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Fair maps mean fair representation. Virginia&apos;s proposed congressional districts aim to better reflect
+                Fair maps mean fair representation. Virginia&apos;s new congressional districts better reflect
                 communities and ensure every vote counts equally.
               </p>
               <a href="/blog" className="inline-block mt-4 text-[#1B3A5C] font-semibold underline hover:text-[#0f2640]">
@@ -110,12 +110,12 @@ export default function Home() {
                 <div className="text-sm text-gray-600">See every Virginia congressional district, current rep, and proposed changes.</div>
               </a>
               <a href="/proposed-map" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
-                <div className="text-lg font-bold text-[#1B3A5C] mb-1">The proposed map, explained →</div>
-                <div className="text-sm text-gray-600">A plain-English breakdown of what actually changes under the 2026 map.</div>
+                <div className="text-lg font-bold text-[#1B3A5C] mb-1">The new map, explained →</div>
+                <div className="text-sm text-gray-600">A plain-English breakdown of what changed under the 2026 map.</div>
               </a>
               <a href="/referendum" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
-                <div className="text-lg font-bold text-[#1B3A5C] mb-1">April 21 referendum →</div>
-                <div className="text-sm text-gray-600">Election day, early voting, and what&apos;s on the ballot.</div>
+                <div className="text-lg font-bold text-[#1B3A5C] mb-1">April 21 referendum results →</div>
+                <div className="text-sm text-gray-600">The referendum passed. See the results and what it means.</div>
               </a>
               <a href="/faq" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
                 <div className="text-lg font-bold text-[#1B3A5C] mb-1">Redistricting FAQ →</div>
