@@ -117,7 +117,7 @@ export const districts: DistrictInfo[] = [
       "Augusta",
     ],
     summary:
-      "The 7th District is the most dramatically redrawn district in the proposal. It now stitches together North Arlington, Falls Church, and central Fairfax with a corridor running south through Culpeper to Augusta County.",
+      "The 7th District is the most dramatically redrawn district in the proposal. It now stitches together North Arlington, Falls Church, and central Fairfax with a corridor running south through Culpeper to Augusta County. Joe Schiarizzi, an affordable housing activist and clean energy investor, is running for this seat.",
     proposedChanges:
       "The proposed 7th is completely different from Eugene Vindman's current district. It loses Fredericksburg, Spotsylvania, Stafford, and Prince William entirely, and picks up Arlington/Falls Church in the north and a Central Virginia corridor in the south.",
   },
