@@ -65,14 +65,16 @@ interface Props {
   highlightDistrict?: string | null;
   markerPosition?: [number, number] | null;
   showCurrent?: boolean;
+  showAppalachianTrail?: boolean;
 }
 
-export default function DistrictMap({ highlightDistrict, markerPosition, showCurrent = false }: Props) {
+export default function DistrictMap({ highlightDistrict, markerPosition, showCurrent = false, showAppalachianTrail = false }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const proposedLayer = useRef<L.GeoJSON | null>(null);
   const currentLayer = useRef<L.GeoJSON | null>(null);
   const labelsLayer = useRef<L.LayerGroup | null>(null);
+  const appalachianTrailLayer = useRef<L.GeoJSON | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
@@ -84,6 +86,10 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
       maxZoom: 18,
     }).addTo(map);
+
+    map.createPane("trailPane");
+    const trailPane = map.getPane("trailPane");
+    if (trailPane) trailPane.style.zIndex = "450";
 
     fetch("/va-districts-proposed.geojson")
       .then((r) => r.json())
@@ -142,6 +148,31 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
         map.on("zoomend", updateCityLabels);
         updateCityLabels();
       });
+
+
+    if (showAppalachianTrail) {
+      fetch("/appalachian-trail-va.geojson")
+        .then((r) => r.json())
+        .then((data) => {
+          if (!mapInstance.current) return;
+
+          appalachianTrailLayer.current = L.geoJSON(data, {
+            pane: "trailPane",
+            style: {
+              color: "#16a34a",
+              weight: 4,
+              opacity: 0.95,
+              lineCap: "round",
+              lineJoin: "round",
+            },
+            onEachFeature: (_feature, layer) => {
+              layer.bindTooltip("Appalachian Trail", { sticky: true, className: "district-tooltip" });
+            },
+          }).addTo(map);
+
+          appalachianTrailLayer.current.bringToFront();
+        });
+    }
 
     // Current districts loaded but not shown by default — too busy
 
