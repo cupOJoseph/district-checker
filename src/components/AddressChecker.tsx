@@ -3,9 +3,12 @@ import { useState, useCallback } from "react";
 import { point } from "@turf/helpers";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import type { Feature, Polygon, MultiPolygon } from "geojson";
+import { getStateDelegate, type StateDelegate } from "@/data/stateDelegates";
 
 interface Result {
   district: string | null;
+  stateHouseDistrict: string | null;
+  stateDelegate?: StateDelegate;
   coords: [number, number];
 }
 
@@ -26,10 +29,16 @@ export default function AddressChecker({ onResult }: Props) {
       const pt = point([lon, lat]);
       for (const feature of data.features) {
         if (booleanPointInPolygon(pt, feature as Feature<Polygon | MultiPolygon>)) {
-          const name = feature.properties?.NAME || feature.properties?.DISTRICT || "";
-          // Extract just the number — handles "Congressional District 4" and "4"
+          const name = String(
+            feature.properties?.NAME ||
+            feature.properties?.NAMELSAD ||
+            feature.properties?.DISTRICT ||
+            feature.properties?.CD119 ||
+            feature.properties?.SLDLST ||
+            ""
+          );
           const match = name.match(/(\d+)/);
-          return match ? match[1] : name || null;
+          return match ? String(parseInt(match[1], 10)) : name || null;
         }
       }
       return null;
@@ -58,7 +67,10 @@ export default function AddressChecker({ onResult }: Props) {
 
       const lat = parseFloat(data[0].lat);
       const lon = parseFloat(data[0].lon);
-      const district = await findDistrict(lat, lon, "/va-districts-proposed.geojson");
+      const [district, stateHouseDistrict] = await Promise.all([
+        findDistrict(lat, lon, "/va-districts-current.geojson"),
+        findDistrict(lat, lon, "/va-house-districts.geojson"),
+      ]);
 
       if (!district) {
         setError("This address doesn't appear to be in a Virginia congressional district.");
@@ -66,10 +78,16 @@ export default function AddressChecker({ onResult }: Props) {
         return;
       }
 
-      const r: Result = { district, coords: [lat, lon] };
+      const stateDelegate = stateHouseDistrict ? getStateDelegate(parseInt(stateHouseDistrict, 10)) : undefined;
+      const r: Result = { district, stateHouseDistrict, stateDelegate, coords: [lat, lon] };
       setResult(r);
       onResult(r);
-      window.plausible?.("District check", { props: { district: `VA-${district}` } });
+      window.plausible?.("District check", {
+        props: {
+          district: `VA-${district}`,
+          stateHouseDistrict: stateHouseDistrict ? `HD-${stateHouseDistrict}` : "unknown",
+        },
+      });
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -109,6 +127,19 @@ export default function AddressChecker({ onResult }: Props) {
             {result.district && (
               <p className="text-xl">
                 📍 Your address is in <span className="text-[#1B3A5C] font-bold text-2xl">Virginia&apos;s {parseInt(result.district)}th Congressional District</span>
+              </p>
+            )}
+            {result.stateDelegate && result.stateHouseDistrict && (
+              <p className="text-lg text-gray-700">
+                🏛️ Your Virginia House Delegate is <span className="font-semibold">{result.stateDelegate.name}</span> ({result.stateDelegate.party}), District {parseInt(result.stateHouseDistrict)}.
+              </p>
+            )}
+            {result.district === "8" && (
+              <p className="text-[#1B3A5C] font-semibold mt-2">
+                🗳️ Adam Dunigan is running as a Democrat in VA-8. Election: August 4.{" "}
+                <a href="https://www.adam4congress.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#0f2640]">
+                  Learn more →
+                </a>
               </p>
             )}
           </div>

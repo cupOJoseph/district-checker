@@ -4,9 +4,11 @@ import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import type { Feature, FeatureCollection, Polygon, MultiPolygon } from "geojson";
 import { promises as fs } from "fs";
 import path from "path";
+import { getStateDelegate } from "@/data/stateDelegates";
 
 // Cache geojson in module scope (per serverless instance)
-let districtsCache: FeatureCollection | null = null;
+let congressionalDistrictsCache: FeatureCollection | null = null;
+let stateHouseDistrictsCache: FeatureCollection | null = null;
 
 async function loadGeoJson(file: string): Promise<FeatureCollection> {
   const p = path.join(process.cwd(), "public", file);
@@ -14,10 +16,14 @@ async function loadGeoJson(file: string): Promise<FeatureCollection> {
   return JSON.parse(raw);
 }
 
-async function getDistricts(): Promise<FeatureCollection> {
-  // The approved 2026 map is stored under the original filename for compatibility.
-  if (!districtsCache) districtsCache = await loadGeoJson("va-districts-proposed.geojson");
-  return districtsCache;
+async function getCongressionalDistricts(): Promise<FeatureCollection> {
+  if (!congressionalDistrictsCache) congressionalDistrictsCache = await loadGeoJson("va-districts-current.geojson");
+  return congressionalDistrictsCache;
+}
+
+async function getStateHouseDistricts(): Promise<FeatureCollection> {
+  if (!stateHouseDistrictsCache) stateHouseDistrictsCache = await loadGeoJson("va-house-districts.geojson");
+  return stateHouseDistrictsCache;
 }
 
 function findDistrict(
@@ -28,9 +34,16 @@ function findDistrict(
   const pt = point([lon, lat]);
   for (const feature of fc.features) {
     if (booleanPointInPolygon(pt, feature as Feature<Polygon | MultiPolygon>)) {
-      const name = String(feature.properties?.NAME || feature.properties?.DISTRICT || "");
+      const name = String(
+        feature.properties?.NAME ||
+        feature.properties?.NAMELSAD ||
+        feature.properties?.DISTRICT ||
+        feature.properties?.CD119 ||
+        feature.properties?.SLDLST ||
+        ""
+      );
       const match = name.match(/(\d+)/);
-      return match ? match[1] : name || null;
+      return match ? String(parseInt(match[1], 10)) : name || null;
     }
   }
   return null;
@@ -58,6 +71,15 @@ interface CheckResponse {
   query: { address?: string; lat?: number; lon?: number };
   resolved?: { lat: number; lon: number; display_name?: string };
   district: string | null;
+  stateHouseDistrict?: string | null;
+  stateDelegate?: {
+    district: number;
+    name: string;
+    party: string;
+    email: string;
+    capitolPhone: string;
+    districtPhone: string;
+  };
   error?: string;
 }
 
@@ -100,13 +122,20 @@ async function handle(
     };
   }
 
-  const districts = await getDistricts();
-  const district = findDistrict(lat, lon, districts);
+  const [congressionalDistricts, stateHouseDistricts] = await Promise.all([
+    getCongressionalDistricts(),
+    getStateHouseDistricts(),
+  ]);
+  const district = findDistrict(lat, lon, congressionalDistricts);
+  const stateHouseDistrict = findDistrict(lat, lon, stateHouseDistricts);
+  const stateDelegate = stateHouseDistrict ? getStateDelegate(parseInt(stateHouseDistrict, 10)) : undefined;
 
   return {
     query: { address: address || undefined, lat, lon },
     resolved: { lat, lon, display_name },
     district,
+    stateHouseDistrict,
+    stateDelegate,
   };
 }
 

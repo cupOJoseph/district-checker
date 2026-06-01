@@ -91,14 +91,14 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
     const trailPane = map.getPane("trailPane");
     if (trailPane) trailPane.style.zIndex = "450";
 
-    fetch("/va-districts-proposed.geojson")
+    fetch("/va-districts-current.geojson")
       .then((r) => r.json())
       .then((data) => {
         proposedLayer.current = L.geoJSON(data, {
           style: (feature) => {
-            const id = feature?.properties?.NAME ?? "";
+            const id = String(feature?.properties?.NAME ?? feature?.properties?.CD119 ?? "");
             const num = parseInt(id) || 0;
-            const hl = highlightDistrict && id === highlightDistrict;
+            const hl = !!highlightDistrict && String(num) === highlightDistrict;
             return {
               fillColor: districtColors[(num - 1) % districtColors.length] || "#999",
               fillOpacity: hl ? 0.6 : 0.25,
@@ -107,7 +107,7 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
             };
           },
           onEachFeature: (feature, layer) => {
-            const id = feature.properties?.NAME;
+            const id = String(feature.properties?.NAME ?? feature.properties?.CD119 ?? "");
             if (id) layer.bindTooltip(`District ${parseInt(id)}`, { sticky: true, className: "district-tooltip" });
           },
         }).addTo(map);
@@ -174,18 +174,16 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
         });
     }
 
-    // Current districts loaded but not shown by default — too busy
-
-    return () => { map.remove(); mapInstance.current = null; };
+        return () => { map.remove(); mapInstance.current = null; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (!proposedLayer.current) return;
     proposedLayer.current.setStyle((feature) => {
-      const id = feature?.properties?.NAME ?? "";
+      const id = String(feature?.properties?.NAME ?? feature?.properties?.CD119 ?? "");
       const num = parseInt(id) || 0;
-      const hl = highlightDistrict && id === highlightDistrict;
+      const hl = !!highlightDistrict && String(num) === highlightDistrict;
       return {
         fillColor: districtColors[(num - 1) % districtColors.length] || "#999",
         fillOpacity: hl ? 0.6 : 0.25,
