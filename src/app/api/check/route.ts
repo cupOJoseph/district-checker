@@ -6,8 +6,7 @@ import { promises as fs } from "fs";
 import path from "path";
 
 // Cache geojson in module scope (per serverless instance)
-let proposedCache: FeatureCollection | null = null;
-let currentCache: FeatureCollection | null = null;
+let districtsCache: FeatureCollection | null = null;
 
 async function loadGeoJson(file: string): Promise<FeatureCollection> {
   const p = path.join(process.cwd(), "public", file);
@@ -15,14 +14,10 @@ async function loadGeoJson(file: string): Promise<FeatureCollection> {
   return JSON.parse(raw);
 }
 
-async function getProposed(): Promise<FeatureCollection> {
-  if (!proposedCache) proposedCache = await loadGeoJson("va-districts-proposed.geojson");
-  return proposedCache;
-}
-
-async function getCurrent(): Promise<FeatureCollection> {
-  if (!currentCache) currentCache = await loadGeoJson("va-districts-current.geojson");
-  return currentCache;
+async function getDistricts(): Promise<FeatureCollection> {
+  // The approved 2026 map is stored under the original filename for compatibility.
+  if (!districtsCache) districtsCache = await loadGeoJson("va-districts-proposed.geojson");
+  return districtsCache;
 }
 
 function findDistrict(
@@ -47,7 +42,7 @@ async function geocode(
   const q = encodeURIComponent(address);
   const url = `https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1&countrycodes=us`;
   const res = await fetch(url, {
-    headers: { "User-Agent": "vadistricts.org/1.0 (contact: joe@votejoe.org)" },
+    headers: { "User-Agent": "vadistricts.org/1.0 (contact: vadistricts.org)" },
   });
   if (!res.ok) return null;
   const data = await res.json();
@@ -62,9 +57,7 @@ async function geocode(
 interface CheckResponse {
   query: { address?: string; lat?: number; lon?: number };
   resolved?: { lat: number; lon: number; display_name?: string };
-  proposed: string | null;
-  current: string | null;
-  changed?: boolean;
+  district: string | null;
   error?: string;
 }
 
@@ -83,8 +76,7 @@ async function handle(
     if (Number.isNaN(lat) || Number.isNaN(lon)) {
       return {
         query: { address: address || undefined, lat: undefined, lon: undefined },
-        proposed: null,
-        current: null,
+        district: null,
         error: "Invalid lat/lon",
       };
     }
@@ -93,8 +85,7 @@ async function handle(
     if (!geo) {
       return {
         query: { address },
-        proposed: null,
-        current: null,
+        district: null,
         error: "Address could not be geocoded",
       };
     }
@@ -104,22 +95,18 @@ async function handle(
   } else {
     return {
       query: {},
-      proposed: null,
-      current: null,
+      district: null,
       error: "Provide ?address=... or ?lat=...&lon=...",
     };
   }
 
-  const [proposed, current] = await Promise.all([getProposed(), getCurrent()]);
-  const proposedDist = findDistrict(lat, lon, proposed);
-  const currentDist = findDistrict(lat, lon, current);
+  const districts = await getDistricts();
+  const district = findDistrict(lat, lon, districts);
 
   return {
     query: { address: address || undefined, lat, lon },
     resolved: { lat, lon, display_name },
-    proposed: proposedDist,
-    current: currentDist,
-    changed: !!proposedDist && !!currentDist && proposedDist !== currentDist,
+    district,
   };
 }
 

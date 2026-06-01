@@ -5,21 +5,20 @@ import Footer from "@/components/Footer";
 import { districts } from "@/data/districts";
 
 export const metadata: Metadata = {
-  title: "All Virginia Congressional Districts (Proposed 2026 Maps) | vadistricts.org",
+  title: "All Virginia Congressional Districts | vadistricts.org",
   description:
-    "Browse all 11 Virginia congressional districts under the proposed 2026 redistricting maps. See current representatives, major cities, and partisan lean for each district.",
+    "Browse all 11 Virginia congressional districts. See current representatives, major cities, and district overviews for each district.",
   keywords: [
     "Virginia congressional districts",
     "Virginia district list",
     "VA-1 VA-2 VA-3 VA-4 VA-5 VA-6 VA-7 VA-8 VA-9 VA-10 VA-11",
-    "Virginia districts proposed maps",
-    "new Virginia districts 2026",
+    "Virginia districts",
   ],
   alternates: { canonical: "https://vadistricts.org/districts" },
   openGraph: {
-    title: "All Virginia Congressional Districts (Proposed 2026 Maps)",
+    title: "All Virginia Congressional Districts",
     description:
-      "Browse all 11 Virginia congressional districts under the proposed 2026 redistricting maps.",
+      "Browse all 11 Virginia congressional districts.",
     url: "https://vadistricts.org/districts",
   },
 };
@@ -40,9 +39,8 @@ export default function DistrictsIndexPage() {
             All Virginia Congressional Districts
           </h1>
           <p className="text-lg text-gray-600 mb-10">
-            Virginia has 11 congressional districts. Below is every district under the{" "}
-            <strong>proposed 2026 redistricting maps</strong>, including current representatives,
-            major cities, and expected partisan lean. Click any district for more detail.
+            Virginia has 11 congressional districts. Below is every district, including current
+            representatives, major cities, and a quick overview. Click any district for more detail.
           </p>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -58,10 +56,10 @@ export default function DistrictsIndexPage() {
                   </h2>
                   <span
                     className={`text-xs font-semibold px-2 py-1 rounded border ${leanColor(
-                      d.proposedLean,
+                      d.lean,
                     )}`}
                   >
-                    Proposed lean: {d.proposedLean}
+                    Lean: {d.lean}
                   </span>
                 </div>
                 <p className="text-sm text-gray-500 mb-2">{d.region}</p>
@@ -83,8 +81,7 @@ export default function DistrictsIndexPage() {
               Not sure which district you&apos;re in?
             </h2>
             <p className="text-gray-600 mb-4">
-              Use our free address checker to find your current and proposed new congressional
-              district.
+              Use our free address checker to find your congressional district.
             </p>
             <Link
               href="/"

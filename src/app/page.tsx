@@ -9,8 +9,7 @@ import EmailSignup from "@/components/EmailSignup";
 const DistrictMap = dynamic(() => import("@/components/DistrictMap"), { ssr: false });
 
 interface CheckResult {
-  proposed: string | null;
-  current: string | null;
+  district: string | null;
   coords: [number, number];
 }
 
@@ -49,9 +48,8 @@ export default function Home() {
           </div>
           <Suspense fallback={<div className="w-full h-[500px] bg-gray-100 rounded-lg animate-pulse" />}>
             <DistrictMap
-              highlightDistrict={result?.proposed || null}
+              highlightDistrict={result?.district || null}
               markerPosition={result?.coords || null}
-              showCurrent={true}
             />
           </Suspense>
           <p className="text-sm text-gray-400 italic mt-3">
@@ -66,20 +64,12 @@ export default function Home() {
             <div className="space-y-6">
               {[
                 {
-                  q: "What happened with Virginia redistricting?",
-                  a: "Virginia voters approved new congressional district maps in a referendum on April 21, 2026. The new maps are now in effect for the 2026 midterm elections.",
-                },
-                {
                   q: "How do I check my Virginia district?",
-                  a: "Enter your address in the checker tool above to see which congressional district you're in under the new maps.",
+                  a: "Enter your address in the checker tool above to see which congressional district you're in.",
                 },
                 {
-                  q: "Did the redistricting referendum pass?",
-                  a: "Yes. Virginia voters approved the redistricting referendum on April 21, 2026. The new maps are now official.",
-                },
-                {
-                  q: "Did my congressional district change?",
-                  a: "It depends on where you live. The new maps significantly redrew several districts, especially in Northern Virginia and Central Virginia. Use our free checker tool to find out.",
+                  q: "Is this tool official?",
+                  a: "No. This is an independent public-interest tool using public congressional district boundary data.",
                 },
               ].map(({ q, a }) => (
                 <details key={q} className="border border-gray-200 rounded-lg p-4 group">
@@ -97,39 +87,28 @@ export default function Home() {
         <section className="bg-gray-50 py-16 px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-[#1B3A5C] mb-4">Why Redistricting Matters</h2>
+              <h2 className="text-3xl font-bold text-[#1B3A5C] mb-4">Find Your Representative</h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Fair maps mean fair representation. Virginia&apos;s new congressional districts better reflect
-                communities and ensure every vote counts equally.
+                Congressional districts determine who represents you in the U.S. House. Use this tool
+                to confirm your district before you vote, volunteer, or contact your representative.
               </p>
-              <a href="/blog" className="inline-block mt-4 text-[#1B3A5C] font-semibold underline hover:text-[#0f2640]">
-                Read more about redistricting in Virginia →
-              </a>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <a href="/districts" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
                 <div className="text-lg font-bold text-[#1B3A5C] mb-1">Browse all 11 districts →</div>
-                <div className="text-sm text-gray-600">See every Virginia congressional district, current rep, and proposed changes.</div>
-              </a>
-              <a href="/proposed-map" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
-                <div className="text-lg font-bold text-[#1B3A5C] mb-1">The new map, explained →</div>
-                <div className="text-sm text-gray-600">A plain-English breakdown of what changed under the 2026 map.</div>
-              </a>
-              <a href="/referendum" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
-                <div className="text-lg font-bold text-[#1B3A5C] mb-1">April 21 referendum results →</div>
-                <div className="text-sm text-gray-600">The referendum passed. See the results and what it means.</div>
+                <div className="text-sm text-gray-600">See every Virginia congressional district, representative, and major area.</div>
               </a>
               <a href="/faq" className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#1B3A5C] hover:shadow-md transition">
-                <div className="text-lg font-bold text-[#1B3A5C] mb-1">Redistricting FAQ →</div>
-                <div className="text-sm text-gray-600">Common questions about Virginia redistricting, answered.</div>
+                <div className="text-lg font-bold text-[#1B3A5C] mb-1">District checker FAQ →</div>
+                <div className="text-sm text-gray-600">Common questions about checking your district, answered.</div>
               </a>
             </div>
 
             <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
               <h3 className="text-xl font-bold text-[#1B3A5C] mb-2">Stay Informed</h3>
               <p className="text-gray-600 mb-4">
-                Get updates on Virginia&apos;s redistricting process and what it means for your community.
+                Get occasional updates about Virginia districts, elections, and civic tools.
               </p>
               <EmailSignup />
             </div>

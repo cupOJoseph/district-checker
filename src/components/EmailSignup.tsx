@@ -26,7 +26,7 @@ export default function EmailSignup() {
   if (submitted) {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center text-green-800">
-        ✅ Thanks! We&apos;ll keep you updated on redistricting in Virginia.
+        ✅ Thanks! We&apos;ll keep you updated on Virginia districts and civic tools.
       </div>
     );
   }

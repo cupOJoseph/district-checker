@@ -34,10 +34,10 @@ export async function GET() {
 
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", zIndex: 1 }}>
           <div style={{ fontSize: "28px", opacity: 0.8, letterSpacing: "4px", textTransform: "uppercase" as const }}>
-            Virginia Redistricting
+            Virginia District Checker
           </div>
           <div style={{ fontSize: "56px", fontWeight: "bold", textAlign: "center" as const, lineHeight: 1.2, maxWidth: "900px" }}>
-            What&apos;s My New Virginia District?
+            What&apos;s My Virginia District?
           </div>
           <div
             style={{
@@ -48,7 +48,7 @@ export async function GET() {
               textAlign: "center" as const,
             }}
           >
-            See how Virginia&apos;s proposed redistricting maps change your district
+            Enter your address to find your congressional district
           </div>
           <div
             style={{

@@ -4,65 +4,48 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Virginia Redistricting FAQ — Common Questions Answered | vadistricts.org",
+  title: "Virginia District Checker FAQ | vadistricts.org",
   description:
-    "Frequently asked questions about Virginia's 2026 mid-decade redistricting, the proposed congressional maps, and how to check whether your district is changing.",
+    "Frequently asked questions about checking your Virginia congressional district.",
   keywords: [
-    "Virginia redistricting FAQ",
-    "Virginia redistricting questions",
+    "Virginia district FAQ",
+    "Virginia district checker",
     "how to check my Virginia district",
-    "Virginia new congressional map",
-    "is my district changing Virginia",
+    "Virginia congressional district",
   ],
   alternates: { canonical: "https://vadistricts.org/faq" },
   openGraph: {
-    title: "Virginia Redistricting FAQ",
+    title: "Virginia District Checker FAQ",
     description:
-      "Common questions about Virginia's 2026 mid-decade redistricting and the proposed congressional maps.",
+      "Common questions about checking your Virginia congressional district.",
     url: "https://vadistricts.org/faq",
   },
 };
 
 const faqs = [
   {
-    q: "Is Virginia really redrawing its congressional districts in 2026?",
-    a: "Yes — and it's a big deal. In February 2026 the General Assembly passed a redistricting plan that was signed by Governor Spanberger, replacing maps that had split communities and locked in safe seats for years. The new, fairer maps go to voters in a statewide referendum on April 21, 2026. If approved, they take effect for the November 2026 U.S. House elections.",
-  },
-  {
     q: "How do I find out which Virginia congressional district I'm in?",
-    a: "Use our free address checker on the vadistricts.org home page. It shows you both your current district (under the 119th Congress map) and your proposed new district (under the 2026 map) side-by-side.",
+    a: "Use the address checker on the home page. Enter your Virginia address and the tool will show your congressional district on the current map.",
   },
   {
     q: "Is this tool official?",
-    a: "No — vadistricts.org is an independent public-interest project. It uses official district boundaries from the Virginia Department of Elections and the U.S. Census Bureau, plus the proposed-map GeoJSON released with the redistricting legislation.",
+    a: "No — vadistricts.org is an independent public-interest project. It uses public congressional district boundary data to help people find their district quickly.",
   },
   {
-    q: "Will my congressional district change?",
-    a: "It depends on where you live. Northern Virginia (especially Arlington, Falls Church, and parts of Fairfax) and Central Virginia see the biggest changes. Hampton Roads and Southwest Virginia see smaller changes. Enter your address on the home page to find out for sure.",
+    q: "What if my address doesn't work?",
+    a: "Try including the street number, city, and state, like '123 Main St, Richmond, VA'. Some counties and cities are split between multiple districts, so a full residential address works best.",
   },
   {
-    q: "Which Virginia district changes the most?",
-    a: "The 7th Congressional District changes the most. It loses Fredericksburg, Spotsylvania, Stafford, and Prince William entirely, and picks up North Arlington, Falls Church, central Fairfax, plus a corridor running south through Culpeper to Augusta County.",
+    q: "Can I browse all Virginia districts without entering an address?",
+    a: "Yes. Visit the districts page to browse all 11 Virginia congressional districts, their representatives, and major areas.",
   },
   {
-    q: "Do the new maps favor Democrats or Republicans?",
-    a: "The proposed maps are drawn around real communities instead of partisan advantage, and the result is that several long-safe Republican districts (VA-1, VA-5, VA-6) become genuinely competitive, while the 9th District cleanly reflects the culture and geography of Southwest Virginia. The 8th, 10th, and 11th remain Democratic. Overall, the maps are more compact, keep communities of interest together, and give voters real choices instead of predetermined outcomes.",
-  },
-  {
-    q: "When is the Virginia redistricting referendum?",
-    a: "April 21, 2026. Early voting began March 6, 2026.",
-  },
-  {
-    q: "What's a 'community of interest'?",
-    a: "It's a group of people who share cultural, economic, or geographic ties and would benefit from being represented by a single member of Congress — for example, all of Hampton Roads' core cities, or the Shenandoah Valley. Good redistricting tries to keep communities of interest whole instead of splitting them.",
-  },
-  {
-    q: "Who drew the proposed maps?",
-    a: "The proposed maps were drafted through the Virginia General Assembly's redistricting process in early 2026 and then passed as legislation. The final version was signed by Governor Spanberger in February 2026.",
+    q: "What data does the tool use?",
+    a: "The checker uses public congressional district boundary files plus address geocoding to match an address to the correct district polygon.",
   },
   {
     q: "Can I embed the district checker on my website?",
-    a: "Yes — visit /embed for a lightweight iframe-friendly version of the checker, designed for campaign sites, local news pages, and civic organizations.",
+    a: "Yes — visit /embed for a lightweight iframe-friendly version of the checker.",
   },
 ];
 
@@ -87,11 +70,10 @@ export default function FAQPage() {
       <main className="flex-1 py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold text-[#1B3A5C] mb-3">
-            Virginia Redistricting — FAQ
+            Virginia District Checker — FAQ
           </h1>
           <p className="text-lg text-gray-600 mb-10">
-            Common questions about Virginia&apos;s 2026 mid-decade redistricting and the proposed
-            congressional maps.
+            Common questions about checking your Virginia congressional district.
           </p>
 
           <div className="space-y-6">

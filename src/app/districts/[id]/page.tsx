@@ -19,8 +19,8 @@ export async function generateMetadata({
   const d = getDistrict(Number(id));
   if (!d) return { title: "District Not Found | vadistricts.org" };
 
-  const title = `Virginia's ${ordinal(d.id)} Congressional District (VA-${d.id}) — Proposed 2026 Map | vadistricts.org`;
-  const description = `${d.summary} ${d.proposedChanges} Current rep: ${d.currentRep} (${d.currentParty}).`;
+  const title = `Virginia's ${ordinal(d.id)} Congressional District (VA-${d.id}) | vadistricts.org`;
+  const description = `${d.summary} ${d.profile} Current rep: ${d.currentRep} (${d.currentParty}).`;
 
   return {
     title,
@@ -31,8 +31,7 @@ export async function generateMetadata({
       `Virginia ${ordinal(d.id)} District`,
       `${d.currentRep}`,
       ...d.majorAreas,
-      "proposed Virginia district",
-      "new VA district map",
+      "Virginia district map",
     ],
     alternates: { canonical: `https://vadistricts.org/districts/${d.id}` },
     openGraph: {
@@ -104,16 +103,16 @@ export default async function DistrictPage({
               </div>
             </div>
             <div className="bg-gray-50 rounded-lg p-4">
-              <div className="text-xs text-gray-500 uppercase font-semibold">Proposed Lean</div>
+              <div className="text-xs text-gray-500 uppercase font-semibold">District Lean</div>
               <div className="text-lg font-bold text-[#1B3A5C]">
-                {d.proposedLean === "D"
+                {d.lean === "D"
                   ? "Democratic"
-                  : d.proposedLean === "R"
+                  : d.lean === "R"
                     ? "Republican"
                     : "Tossup"}
               </div>
               <div className="text-sm text-gray-600">
-                D {d.proposedDemPct.toFixed(1)}% · R {d.proposedRepPct.toFixed(1)}%
+                D {d.demPct.toFixed(1)}% · R {d.repPct.toFixed(1)}%
               </div>
             </div>
           </div>
@@ -122,9 +121,9 @@ export default async function DistrictPage({
           <p className="text-gray-700 leading-relaxed mb-6">{d.summary}</p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-8 mb-3">
-            What Changes in the Proposed 2026 Map
+            District Profile
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-6">{d.proposedChanges}</p>
+          <p className="text-gray-700 leading-relaxed mb-6">{d.profile}</p>
 
           <h2 className="text-2xl font-bold text-[#1B3A5C] mt-8 mb-3">Major Areas</h2>
           <ul className="list-disc list-inside text-gray-700 mb-8 space-y-1">
@@ -136,8 +135,7 @@ export default async function DistrictPage({
           <div className="bg-[#1B3A5C] text-white rounded-xl p-6 mb-8">
             <h3 className="text-xl font-bold mb-2">Is VA-{d.id} your district?</h3>
             <p className="mb-4 text-blue-100">
-              Enter your address to confirm whether you&apos;re in the {ordinal(d.id)} district
-              under the current map, the proposed map, or both.
+              Enter your address to confirm whether you&apos;re in the {ordinal(d.id)} district.
             </p>
             <Link
               href="/"
@@ -166,7 +164,7 @@ export default async function DistrictPage({
           <div className="mt-12 bg-gray-50 rounded-xl p-6 border border-gray-100">
             <h3 className="text-lg font-bold text-[#1B3A5C] mb-2">Stay Informed</h3>
             <p className="text-gray-600 text-sm mb-4">
-              Get updates on Virginia&apos;s redistricting process.
+              Get occasional updates about Virginia districts and civic tools.
             </p>
             <EmailSignup />
           </div>

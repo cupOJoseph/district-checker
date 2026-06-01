@@ -4,18 +4,14 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vadistricts.org"),
-  title: "What's My New Virginia District? | Virginia Redistricting Checker",
+  title: "What's My Virginia District? | Virginia District Checker",
   description:
-    "Virginia is redrawing its congressional maps. Enter your address to find your current and proposed new district with our free interactive map tool.",
+    "Enter your address to find your current Virginia congressional district with our free interactive map tool.",
   keywords: [
-    "Virginia redistricting",
     "Virginia congressional districts",
     "district checker",
     "Virginia maps",
-    "redistricting 2026",
-    "fair maps Virginia",
     "find my district",
-    "VA redistricting referendum",
     "vadistricts",
     "Virginia district map",
   ],
@@ -23,17 +19,17 @@ export const metadata: Metadata = {
     canonical: "https://vadistricts.org",
   },
   openGraph: {
-    title: "What's My New Virginia District?",
+    title: "What's My Virginia District?",
     description:
-      "Virginia is redrawing its congressional maps. Find your current and proposed new district with our free interactive map.",
+      "Find your current Virginia congressional district with our free interactive map.",
     url: "https://vadistricts.org",
-    siteName: "Virginia Redistricting Checker",
+    siteName: "Virginia District Checker",
     images: [
       {
         url: "/og?v=2",
         width: 1200,
         height: 630,
-        alt: "Virginia Redistricting Checker - Check Your New District",
+        alt: "Virginia District Checker - Check Your District",
       },
     ],
     locale: "en_US",
@@ -41,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "What's My New Virginia District?",
+    title: "What's My Virginia District?",
     description:
-      "Virginia is redrawing its congressional maps. Find your current and proposed new district.",
+      "Find your current Virginia congressional district.",
     images: ["/og?v=2"],
   },
   robots: { index: true, follow: true },
@@ -54,10 +50,10 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      name: "Virginia Redistricting Checker",
+      name: "Virginia District Checker",
       url: "https://vadistricts.org",
       description:
-        "Free tool to check your current and proposed Virginia congressional district.",
+        "Free tool to check your current Virginia congressional district.",
       potentialAction: {
         "@type": "SearchAction",
         target: "https://vadistricts.org/?q={search_term_string}",
@@ -81,34 +77,18 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "What is Virginia redistricting?",
+          name: "How do I check my Virginia congressional district?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Virginia is proposing new congressional district maps through a mid-decade redistricting process. A referendum on April 21, 2026 will let voters decide whether to adopt the new maps before the November midterm elections.",
+            text: "Enter your address on vadistricts.org and the tool will show your current congressional district under Virginia's official map.",
           },
         },
         {
           "@type": "Question",
-          name: "How do I check my new Virginia district?",
+          name: "Is this tool official?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Enter your address on vadistricts.org and the tool will show you both your current congressional district and your proposed new district under the new maps.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "When is the Virginia redistricting referendum?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "The redistricting referendum is scheduled for April 21, 2026. Early voting is already open as of March 6, 2026.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Will my congressional district change?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "It depends on where you live. The proposed maps significantly redraw several districts, especially in Northern Virginia and Central Virginia. Use our free checker tool to see if your district changes.",
+            text: "No. vadistricts.org is an independent public-interest tool that uses public congressional district boundary data.",
           },
         },
       ],
