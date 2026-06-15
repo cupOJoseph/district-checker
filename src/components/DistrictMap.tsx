@@ -3,11 +3,38 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import pointOnFeature from "@turf/point-on-feature";
+import { getDistrict } from "@/data/districts";
 
-const districtColors = [
-  "#5b9bd5", "#7ab8e0", "#4a90c4", "#6aaed6", "#8ec5e8",
-  "#5da5d8", "#79b7db", "#4d96c8", "#6db3de", "#8ac2e4", "#5ea8da",
-];
+const PARTY_COLORS = {
+  D: "#3b82f6",
+  R: "#ef4444",
+} as const;
+
+function districtNumberFromFeature(feature?: GeoJSON.Feature): number | null {
+  const props = feature?.properties ?? {};
+  const raw = String(props.BASENAME ?? props.CD119 ?? props.NAME ?? props.DISTRICT ?? "");
+  const match = raw.match(/\d+/);
+  return match ? parseInt(match[0], 10) : null;
+}
+
+function districtStyle(feature: GeoJSON.Feature | undefined, highlightDistrict?: string | null) {
+  const num = districtNumberFromFeature(feature);
+  const info = num ? getDistrict(num) : undefined;
+  const hl = !!highlightDistrict && num !== null && String(num) === highlightDistrict;
+  return {
+    fillColor: info?.currentParty ? PARTY_COLORS[info.currentParty] : "#94a3b8",
+    fillOpacity: hl ? 0.48 : 0.22,
+    color: hl ? "#C5A55A" : info?.currentParty === "R" ? "#991b1b" : "#1d4ed8",
+    weight: hl ? 3 : 1.5,
+  };
+}
+
+function districtTooltip(feature?: GeoJSON.Feature) {
+  const num = districtNumberFromFeature(feature);
+  if (!num) return "District unknown";
+  const info = getDistrict(num);
+  return info ? `VA-${num}: ${info.currentRep} (${info.currentParty})` : `VA-${num}`;
+}
 
 const VA_CITIES: { name: string; lat: number; lng: number; minZoom?: number }[] = [
   // Major cities (show at all zooms)
@@ -95,20 +122,9 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
       .then((r) => r.json())
       .then((data) => {
         proposedLayer.current = L.geoJSON(data, {
-          style: (feature) => {
-            const id = String(feature?.properties?.NAME ?? feature?.properties?.CD119 ?? "");
-            const num = parseInt(id) || 0;
-            const hl = !!highlightDistrict && String(num) === highlightDistrict;
-            return {
-              fillColor: districtColors[(num - 1) % districtColors.length] || "#999",
-              fillOpacity: hl ? 0.6 : 0.25,
-              color: hl ? "#C5A55A" : "#1B3A5C",
-              weight: hl ? 3 : 1.5,
-            };
-          },
+          style: (feature) => districtStyle(feature, highlightDistrict),
           onEachFeature: (feature, layer) => {
-            const id = String(feature.properties?.NAME ?? feature.properties?.CD119 ?? "");
-            if (id) layer.bindTooltip(`District ${parseInt(id)}`, { sticky: true, className: "district-tooltip" });
+            layer.bindTooltip(districtTooltip(feature), { sticky: true, className: "district-tooltip" });
           },
         }).addTo(map);
 
@@ -180,17 +196,7 @@ export default function DistrictMap({ highlightDistrict, markerPosition, showCur
 
   useEffect(() => {
     if (!proposedLayer.current) return;
-    proposedLayer.current.setStyle((feature) => {
-      const id = String(feature?.properties?.NAME ?? feature?.properties?.CD119 ?? "");
-      const num = parseInt(id) || 0;
-      const hl = !!highlightDistrict && String(num) === highlightDistrict;
-      return {
-        fillColor: districtColors[(num - 1) % districtColors.length] || "#999",
-        fillOpacity: hl ? 0.6 : 0.25,
-        color: hl ? "#C5A55A" : "#1B3A5C",
-        weight: hl ? 3 : 1.5,
-      };
-    });
+    proposedLayer.current.setStyle((feature) => districtStyle(feature, highlightDistrict));
   }, [highlightDistrict]);
 
   useEffect(() => {
