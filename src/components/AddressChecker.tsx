@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 import { point } from "@turf/helpers";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import type { Feature, Polygon, MultiPolygon } from "geojson";
+import { getDistrict } from "@/data/districts";
 import { getStateDelegate, type StateDelegate } from "@/data/stateDelegates";
 
 interface Result {
@@ -14,6 +15,17 @@ interface Result {
 
 interface Props {
   onResult: (result: Result | null) => void;
+}
+
+function ordinal(n: number) {
+  const mod100 = n % 100;
+  if (mod100 >= 11 && mod100 <= 13) return `${n}th`;
+  switch (n % 10) {
+    case 1: return `${n}st`;
+    case 2: return `${n}nd`;
+    case 3: return `${n}rd`;
+    default: return `${n}th`;
+  }
 }
 
 export default function AddressChecker({ onResult }: Props) {
@@ -124,14 +136,33 @@ export default function AddressChecker({ onResult }: Props) {
       {result && (
         <div className="space-y-4">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 space-y-2">
-            {result.district && (
-              <p className="text-xl">
-                📍 Your address is in <span className="text-[#1B3A5C] font-bold text-2xl">Virginia&apos;s {parseInt(result.district)}th Congressional District</span>
-              </p>
-            )}
+            {result.district && (() => {
+              const districtNumber = parseInt(result.district, 10);
+              const congressionalDistrict = getDistrict(districtNumber);
+              return (
+                <>
+                  <p className="text-xl">
+                    📍 Your address is in <span className="text-[#1B3A5C] font-bold text-2xl">Virginia&apos;s {ordinal(districtNumber)} Congressional District</span>
+                  </p>
+                  {congressionalDistrict && (
+                    <p className="text-lg text-gray-700">
+                      🏛️ Your current US House representative is: <span className="font-semibold">{congressionalDistrict.currentRep}</span> ({congressionalDistrict.currentParty}).
+                    </p>
+                  )}
+                </>
+              );
+            })()}
             {result.stateDelegate && result.stateHouseDistrict && (
               <p className="text-lg text-gray-700">
                 🏛️ Your Virginia House Delegate is <span className="font-semibold">{result.stateDelegate.name}</span> ({result.stateDelegate.party}), District {parseInt(result.stateHouseDistrict)}.
+              </p>
+            )}
+            {result.district === "1" && (
+              <p className="text-[#1B3A5C] font-semibold mt-2">
+                🗳️ Tim Cywinski is running for the Democratic nomination in VA-1.{" "}
+                <a href="https://www.votetimva.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#0f2640]">
+                  Learn more →
+                </a>
               </p>
             )}
             {result.district === "8" && (
